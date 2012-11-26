@@ -1,5 +1,7 @@
 #!/usr/local/bin/node
 
+process.chdir(__dirname);
+
 if(process.argv[2] == 'config') {
   console.log("graph_category irc");
   console.log("graph_title ircd status");
