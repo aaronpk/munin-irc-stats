@@ -29,6 +29,8 @@ if(config.serverPassword) {
 
 var client = new irc.Client(config.server, config.nick, options);
 
+var collected = [];
+
 client.on('raw', function(msg){
   var line;
 
@@ -37,11 +39,17 @@ client.on('raw', function(msg){
 
   if(match=line.match(/There are (\d+) users and (\d+) invisible on (\d+) servers/)) {
     console.log("clients.value " + (parseInt(match[1])+parseInt(match[2])));
+    collected.push('clients');
   }
   if(match=line.match(/(\d+) channels formed/)) {
     console.log("channels.value " + match[1]);
+    collected.push('channels');
   }
 
+  console.log(collected.count);
+  if(collected.length == 2) {
+    process.exit();
+  }
 });
 
 // Trap errors
