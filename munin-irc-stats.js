@@ -46,7 +46,6 @@ client.on('raw', function(msg){
     collected.push('channels');
   }
 
-  console.log(collected.count);
   if(collected.length == 2) {
     process.exit();
   }
